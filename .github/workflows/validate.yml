@@ -1,0 +1,24 @@
+name: Check profiles
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # the PR's merge commit and main, so the check can see what changed
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Pull requests: only the files this PR changes, and only your own.
+      - if: github.event_name == 'pull_request'
+        run: node scripts/check-pr.mjs
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_ASSOCIATION: ${{ github.event.pull_request.author_association }}
+      # main: the whole folder, so maintainers notice anything that slipped through.
+      - if: github.event_name == 'push'
+        run: node scripts/validate.mjs

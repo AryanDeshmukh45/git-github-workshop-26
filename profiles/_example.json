@@ -1,0 +1,10 @@
+{
+  "name": "Your Name",
+  "github_username": "your-github-username",
+  "bio": "One line about you, 120 characters at most.",
+  "interests": ["Python", "Web Dev"],
+  "batch_year": 2029,
+  "language": "Python",
+  "link": "https://your-site.example",
+  "fun_fact": "Optional. Something people wouldn't guess about you."
+}
